@@ -35,17 +35,26 @@ function SaveSnap(){
 
 function uploadcomplete(event){
     document.getElementById("loading").innerHTML="Complete";
+	var maxEmotion;
 	var xmlDoc=event.target.responseXML;
 	var list = xmlDoc.getElementsByTagName("scores");
-	var highest = list[0].childNodes[0];
-	if (list[0].childNodes[1] > highest) { highest = list[0].childNodes[1]; }
-	else if (list[0].childNodes[2] > highest) { highest = list[0].childNodes[2]; }
-	else if (list[0].childNodes[3] > highest) { highest = list[0].childNodes[3]; }
-	else if (list[0].childNodes[4] > highest) { highest = list[0].childNodes[4]; }
-	else if (list[0].childNodes[5] > highest) { highest = list[0].childNodes[5]; }
-	else if (list[0].childNodes[6] > highest) { highest = list[0].childNodes[6]; }
-	else if (list[0].childNodes[7] > highest) { highest = list[0].childNodes[7]; }
-	document.getElementById("highest").innerHTML = highest.textContent;
+	var anger = Number(document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent);
+	var contempt = Number(document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent);
+	var disgust = Number(document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent);
+	var fear = Number(document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent);
+	var happiness = Number(document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent);
+	var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
+	var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
+	var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
+	var maxValue = Math.max(anger, contempt, disgust, fear, happiness, neutral, sadness, surprise);
+	for (var i = 0; i < 8; i++) {
+		if (Number(list[0].childNodes[i].textContent) == maxValue) {
+			maxEmotion = list[0].childNodes[i].tagName; 
+		}
+	}
+	
+	document.getElementById("maxEmotion").innerHTML = maxEmotion;
+	document.getElementById("maxValue").innerHTML = maxValue;
 	var audio = document.getElementById("audio");
 	audio.play();
 }
@@ -79,7 +88,16 @@ window.onload= ShowCam;
 </div>
 <div class="container" id="Saved">
     <div id="chart" class="chart">
-		<p>Highest : <span id="highest"></span></p>
+		<p>Anger : <span id="anger"></span></p>
+		<p>Contempt : <span id="contempt"></span></p>
+		<p>Disgust : <span id="disgust"></span></p>
+		<p>Fear : <span id="fear"></span></p>
+		<p>Happiness : <span id="happiness"></span></p>
+		<p>Neutral : <span id="neutral"></span></p>
+		<p>Sadness : <span id="sadness"></span></p>
+		<p>Surprise : <span id="surprise"></span></p>
+		<p>Max Emotion : <span id="maxEmotion"></span></p>
+		<p>Max Value : <span id="maxValue"></span></p>
     </div>
 	<div class="footer"><b>Task : </b><span id="loading"></span></div>
 </div>
