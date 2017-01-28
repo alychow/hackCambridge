@@ -24,12 +24,12 @@ function SaveSnap(){
     var file = document.getElementById("base64image").src.substring(23).replace(' ', '+');
 	var img = Base64Binary.decodeArrayBuffer(file);
     var ajax = new XMLHttpRequest();
-    ajax.addEventListener("load", function(event) { uploadcomplete(event);}, false);
+    ajax.addEventListener("load", function(event) { uploadcomplete(event); }, false);
     ajax.open("POST", "https://api.projectoxford.ai/emotion/v1.0/recognize","image/jpg");
 	ajax.setRequestHeader("Content-Type","application/octet-stream");
 	//ajax.setRequestHeader("Accept-Encoding","gzip, deflate");
 	ajax.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml");
-	ajax.setRequestHeader("Ocp-Apim-Subscription-Key","ADD YOUR KEY");
+	ajax.setRequestHeader("Ocp-Apim-Subscription-Key","5a8753340fbc495b8d59347c13910f9d");
 	ajax.send(img);
 }
 
@@ -37,23 +37,22 @@ function uploadcomplete(event){
     document.getElementById("loading").innerHTML="Complete";
 	var xmlDoc=event.target.responseXML;
 	var list = xmlDoc.getElementsByTagName("scores");
-	document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent;
-	document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent;
-	document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent;
-	document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent;
-	document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent;
-	document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent;
-	document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent;
-	document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent;
-	var highest = anger;
-	if (contempt > highest) { highest = contempt; }
-	else if (disgust > highest) { highest = disgust; }
-	else if (fear >  highest) { highest = fear; }
-	else if (happiness > highest) { highest = happiness; }
-	else if (neutral > highest) { highest = neutral; }
-	else if (sadness > highest) { highest = sadness; }
-	else if (surprise > highest) { highest = surprise; }
-	document.getElementById("anger").innerHTML = highest.textContent;
+	var highest = list[0].childNodes[0];
+	if (list[0].childNodes[1] > highest) { highest = list[0].childNodes[1]; }
+	else if (list[0].childNodes[2] > highest) { highest = list[0].childNodes[2]; }
+	else if (list[0].childNodes[3] > highest) { highest = list[0].childNodes[3]; }
+	else if (list[0].childNodes[4] > highest) { highest = list[0].childNodes[4]; }
+	else if (list[0].childNodes[5] > highest) { highest = list[0].childNodes[5]; }
+	else if (list[0].childNodes[6] > highest) { highest = list[0].childNodes[6]; }
+	else if (list[0].childNodes[7] > highest) { highest = list[0].childNodes[7]; }
+	document.getElementById("highest").innerHTML = highest.textContent;
+	var audio = document.getElementById("audio");
+	audio.play();
+}
+
+function play(){
+    var audio = document.getElementById("audio");
+	audio.play();
 }
 
 window.onload= ShowCam;
@@ -80,18 +79,11 @@ window.onload= ShowCam;
 </div>
 <div class="container" id="Saved">
     <div id="chart" class="chart">
-		<p>Anger : <span id="anger"></span></p>
-		<p>Contempt : <span id="contempt"></span></p>
-		<p>Disgust : <span id="disgust"></span></p>
-		<p>Fear : <span id="fear"></span></p>
-		<p>Happiness : <span id="happiness"></span></p>
-		<p>Neutral : <span id="neutral"></span></p>
-		<p>Sadness : <span id="sadness"></span></p>
-		<p>Surprise : <span id="surprise"></span></p>
 		<p>Highest : <span id="highest"></span></p>
     </div>
 	<div class="footer"><b>Task : </b><span id="loading"></span></div>
 </div>
+<audio id="audio" src="confused.mp3"></audio>
 
 </body>
 <script type="text/javascript" src="webcam.min.js"></script>
