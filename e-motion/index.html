@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
   <title>Realtime communication with WebRTC</title>
-
-  <link rel="stylesheet" href="e-motion/css/main.css" />
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>  
+  <link rel="stylesheet" href="/css/main.css" />
 
 </head>
 
@@ -13,15 +12,26 @@
 
   <h1>Realtime communication with WebRTC</h1>
 
-  <div id="videos">
+  <div class = "camera" id="videos">
     <video id="localVideo" autoplay muted></video>
     <video id="remoteVideo" autoplay></video>
-  </div>
+    <button id="startbutton">Take photo</button>
 
-  <script src="node_modules/socket.io-client/socket.io.js"></script>
+<div class="container" id="Cam"><b>Webcam Preview...</b>
+    <div class="footer"><div id="my_camera"></div><form><input type="button" value="Snap It" onClick="take_snapshot()"></form></div>
+    <div class="container" id="Prev">
+    <div class="footer"><b>Snap Preview...</b><div id="results"></div></div>
+</div>
+</div>
+  </div>
+  <canvas id="canvas">
+ </canvas>
   <script src="js/lib/adapter.js"></script>
   <script src="js/main.js"></script>
+  <script type="text/javascript" src="js/base64-binary.js"></script>
+  <script type="text/javascript" src="js/webcam.min.js"></script>
 
+      <script src="js/capturevideo.js"></script>
 </body>
 
 </html>
