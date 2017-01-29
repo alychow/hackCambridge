@@ -5,6 +5,8 @@
 <title>Emotion Analysis</title>
 <link rel="stylesheet" href="css/main.css">
 
+<h1> eMotion</h1>
+
 <script language="JavaScript">
 window.setInterval(take_snapshot, 10000);
 function take_snapshot() {
@@ -90,13 +92,13 @@ function uploadcomplete(event){
 		document.getElementById("emoji").innerHTML = "\u{1F62D}";
 		//audio.play();
 	}
-	
+
 	for (var i = 0; i < 8; i++) {
 		if (Number(list[0].childNodes[i].textContent) == maxValue) {
-			maxEmotion = list[0].childNodes[i].tagName; 
+			maxEmotion = list[0].childNodes[i].tagName;
 		}
 	}
-	
+
 	if (maxValue == Number(list[0].childNodes[5].textContent) && Number(list[0].childNodes[0].textContent) > 0.01 && Number(list[0].childNodes[1].textContent) > 0.01) {
 		audio = document.getElementById("confused");
 		maxEmotion = Confused.textContent;
@@ -104,7 +106,7 @@ function uploadcomplete(event){
 	}
 
 	document.getElementById("maxEmotion").innerHTML = maxEmotion;
-	document.getElementById("maxValue").innerHTML = maxValue;	
+	document.getElementById("maxValue").innerHTML = maxValue;
 	audio.play();
 }
 
@@ -114,16 +116,7 @@ function play() {
 
 window.onload= ShowCam;
 </script>
-<style type="text/css">
-.container {display:inline-block;}
-.chart div {
-   font: 10px sans-serif;
-   text-align: right;
-   padding: 3px;
-   margin: 1px;
-   color: white;
- }
-</style
+
 </head>
 <body>
 
