@@ -12,13 +12,18 @@
 
   <h1>Realtime communication with WebRTC</h1>
 
-  <div id="videos">
+  <div class = "camera" id="videos">
     <video id="localVideo" autoplay muted></video>
     <video id="remoteVideo" autoplay></video>
+    <button id="startbutton">Take photo</button>
+
   </div>
+  <canvas id="canvas">
+ </canvas>
   <script src="/socket.io"></script>
   <script src="node_modules/socket.io-client/socket.io.js"></script>
   <script src="js/lib/adapter.js"></script>
+    <script src="js/capture.js"></script>
   <script src="js/main.js"></script>
 
 </body>
