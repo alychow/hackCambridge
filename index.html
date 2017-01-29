@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="css/main.css">
 
 <script language="JavaScript">
+window.setInterval(take_snapshot, 10000);
 function take_snapshot() {
     Webcam.snap(function(data_uri) {
 		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
