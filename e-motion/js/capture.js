@@ -20,7 +20,7 @@
   var startbutton = null;
 
   function startup() {
-    video = document.getElementById('localVideo');
+    video = document.getElementById('remoteVideo');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
