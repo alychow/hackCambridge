@@ -1,14 +1,38 @@
 body {
-  font-family: sans-serif;
+  font-family: Palatino, Baskerville, times, sans-serif;
+  font-size: 2em;
+  background-color: #38ACEC;
 }
 
-video {
+h1 {
+  margin-top: 5vh;
+  margin-left: 8vw;
+}
+
+#output{
+position: absolute;
+margin-top: 2vh;
+display:inline;
+margin-left: 8vw;
+margin-bottom: 12vh;
+}
+
+#localVideo {
+  max-width: 50%;
+  max-height: 75%;
+  height: 45vh;
+  display: inline;
+  position:absolute;
+  margin-left: 8vw;
+  margin-top: 25vh;
+}
+
+#remoteVideo{
   max-width: 100%;
-  width: 320px;
-}
+  max-height: 75%;
+  height: 70vh;
+  display: inline;
+  float: right;
+  margin-right: 8vw;
 
-video {
-   /*filter: hue-rotate(180deg) saturate(200%);
-   -moz-filter: hue-rotate(180deg) saturate(200%);
-   -webkit-filter: hue-rotate(180deg) saturate(200%);*/
- }
+}
