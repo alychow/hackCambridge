@@ -3,10 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Emotion Analysis</title>
+<link rel="stylesheet" href="css/main.css">
 
 <h1> eMotion</h1>
 
 <script language="JavaScript">
+window.setInterval(take_snapshot, 10000);
 function take_snapshot() {
     Webcam.snap(function(data_uri) {
 		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
