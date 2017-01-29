@@ -5,10 +5,7 @@
 <title>Emotion Analysis</title>
 <link rel="stylesheet" href="css/main.css">
 
-<h1> eMotion</h1>
-
 <script language="JavaScript">
-window.setInterval(take_snapshot, 10000);
 function take_snapshot() {
     Webcam.snap(function(data_uri) {
 		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
@@ -41,14 +38,14 @@ function uploadcomplete(event){
 	var maxEmotion;
 	var audio;
 	var list = xmlDoc.getElementsByTagName("scores");
-	var anger = Number(document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent);
- 	var contempt = Number(document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent);
- 	var disgust = Number(document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent);
- 	var fear = Number(document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent);
- 	var happiness = Number(document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent);
- 	var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
-	var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
-	var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
+	//var anger = Number(document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent);
+ 	//var contempt = Number(document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent);
+ 	//var disgust = Number(document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent);
+ 	//var fear = Number(document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent);
+ 	//var happiness = Number(document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent);
+ 	//var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
+	//var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
+	//var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
 	var maxValue = Number(list[0].childNodes[5].textContent);
 	if (Number(list[0].childNodes[7].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[7].textContent);
@@ -92,13 +89,13 @@ function uploadcomplete(event){
 		document.getElementById("emoji").innerHTML = "\u{1F62D}";
 		//audio.play();
 	}
-
+	
 	for (var i = 0; i < 8; i++) {
 		if (Number(list[0].childNodes[i].textContent) == maxValue) {
-			maxEmotion = list[0].childNodes[i].tagName;
+			maxEmotion = list[0].childNodes[i].tagName; 
 		}
 	}
-
+	
 	if (maxValue == Number(list[0].childNodes[5].textContent) && Number(list[0].childNodes[0].textContent) > 0.01 && Number(list[0].childNodes[1].textContent) > 0.01) {
 		audio = document.getElementById("confused");
 		maxEmotion = Confused.textContent;
@@ -106,7 +103,7 @@ function uploadcomplete(event){
 	}
 
 	document.getElementById("maxEmotion").innerHTML = maxEmotion;
-	document.getElementById("maxValue").innerHTML = maxValue;
+	document.getElementById("maxValue").innerHTML = maxValue;	
 	audio.play();
 }
 
@@ -116,7 +113,9 @@ function play() {
 
 window.onload= ShowCam;
 </script>
+<style type="text/css">
 
+</style>
 </head>
 <body>
 
@@ -133,7 +132,7 @@ window.onload= ShowCam;
 		<p>Happiness : <span id="happiness"></span></p>
 		<p>Neutral : <span id="neutral"></span></p>
 		<p>Sadness : <span id="sadness"></span></p>
-		<p>Surprise : <span id="surprise"></span></p> -->
+		<p>Surprise : <span id="surprise"></span></p>-->
 		<p>Max Emotion : <span id="maxEmotion"></span></p>
  		<p>Max Value : <span id="maxValue"></span></p>
     </div>
