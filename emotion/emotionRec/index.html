@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Emotion Intelligence using MS Cognitive Service</title>
+<title>Emotion Analysis</title>
+<link rel="stylesheet" href="css/main.css">
 
 <script language="JavaScript">
 window.setInterval(take_snapshot, 10000);
 function take_snapshot() {
     Webcam.snap(function(data_uri) {
-		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
+		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'" style="display:none;"/>';
 		SaveSnap();
 	});
 }
@@ -38,48 +39,55 @@ function uploadcomplete(event){
 	var maxEmotion;
 	var audio;
 	var list = xmlDoc.getElementsByTagName("scores");
-	var anger = Number(document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent);
- 	var contempt = Number(document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent);
- 	var disgust = Number(document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent);
- 	var fear = Number(document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent);
- 	var happiness = Number(document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent);
- 	var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
-	var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
-	var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
+	//var anger = Number(document.getElementById("anger").innerHTML = list[0].childNodes[0].textContent);
+ 	//var contempt = Number(document.getElementById("contempt").innerHTML = list[0].childNodes[1].textContent);
+ 	//var disgust = Number(document.getElementById("disgust").innerHTML = list[0].childNodes[2].textContent);
+ 	//var fear = Number(document.getElementById("fear").innerHTML = list[0].childNodes[3].textContent);
+ 	//var happiness = Number(document.getElementById("happiness").innerHTML = list[0].childNodes[4].textContent);
+ 	//var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
+	//var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
+	//var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
 	var maxValue = Number(list[0].childNodes[5].textContent);
 	if (Number(list[0].childNodes[7].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[7].textContent);
 		audio = document.getElementById("surprised");
+		document.getElementById("emoji").innerHTML = "\u{1F631}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[0].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[0].textContent);
 		audio = document.getElementById("angry");
+		document.getElementById("emoji").innerHTML = "\u{1F624}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[1].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[1].textContent);
 		audio = document.getElementById("contempted");
+		document.getElementById("emoji").innerHTML = "\u{1F614}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[2].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[2].textContent);
 		audio = document.getElementById("disgusted");
+		document.getElementById("emoji").innerHTML = "\u{1F616}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[3].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[3].textContent);
 		audio = document.getElementById("scared");
+		document.getElementById("emoji").innerHTML = "\u{1F628}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[4].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[4].textContent);
 		audio = document.getElementById("happy");
+		document.getElementById("emoji").innerHTML = "\u{1F601}";
 		//audio.play();
 	}
 	if (Number(list[0].childNodes[6].textContent) > maxValue) {
 		maxValue = Number(list[0].childNodes[6].textContent);
 		audio = document.getElementById("sad");
+		document.getElementById("emoji").innerHTML = "\u{1F62D}";
 		//audio.play();
 	}
 	
@@ -91,64 +99,43 @@ function uploadcomplete(event){
 	
 	if (maxValue == Number(list[0].childNodes[5].textContent) && Number(list[0].childNodes[0].textContent) > 0.01 && Number(list[0].childNodes[1].textContent) > 0.01) {
 		audio = document.getElementById("confused");
-		audio.play();
 		maxEmotion = Confused.textContent;
+		document.getElementById("emoji").innerHTML = "\u{1F635}";
 	}
 
 	document.getElementById("maxEmotion").innerHTML = maxEmotion;
 	document.getElementById("maxValue").innerHTML = maxValue;	
-	audio.play();
-}
-
-function play() {
-	//audio.play();
-}
+	new Audio('audio/'+maxEmotion+'.mp3').play()
+	}
 
 window.onload= ShowCam;
 </script>
-<style type="text/css">
-.container{display:inline-block;width:320px;}
-.footer{background:rgb(255,255,215);}
-.chart div {
-   font: 10px sans-serif;
-   background-color: steelblue;
-   text-align: right;
-   padding: 3px;
-   margin: 1px;
-   color: white;
- }
-</style
+
 </head>
 <body>
-<div class="container" id="Cam"><b>Webcam Preview...</b>
+
+<div class="container" id="Cam"><b></b>
     <div class="footer"><div id="my_camera"></div><form><input type="button" value="Snap It" onClick="take_snapshot()"></form></div>
-</div>
-<div class="container" id="Prev">
-    <div class="footer"><b>Snap Preview...</b><div id="results"></div></div>
+    <div class="footer"><b></b><div id="results"></div></div>
 </div>
 <div class="container" id="Saved">
     <div id="chart" class="chart">
-		<p>Anger : <span id="anger"></span></p>
+		<!--<p>Anger : <span id="anger"></span></p>
 		<p>Contempt : <span id="contempt"></span></p>
 		<p>Disgust : <span id="disgust"></span></p>
 		<p>Fear : <span id="fear"></span></p>
 		<p>Happiness : <span id="happiness"></span></p>
 		<p>Neutral : <span id="neutral"></span></p>
 		<p>Sadness : <span id="sadness"></span></p>
-		<p>Surprise : <span id="surprise"></span></p>
-		<p>Max Emotion : <span id="maxEmotion"></span></p>
- 		<p>Max Value : <span id="maxValue"></span></p>
+		<p>Surprise : <span id="surprise"></span></p>-->
+		<p>Emotion : <span id="maxEmotion"></span></p>
+ 		<p>Probability : <span id="maxValue"></span></p>
     </div>
 	<div class="footer"><b>Task : </b><span id="loading"></span></div>
+	<div>
+		<p>You as an emoji: <span id="emoji"></span> </p>
+	</div>
 </div>
-<audio id="confused" src="confused.mp3"></audio>
-<audio id="sad" src="sad.mp3"></audio>
-<audio id="happy" src="happy.mp3"></audio>
-<audio id="contempted" src="contempt.mp3"></audio>
-<audio id="disgusted" src="disgust.mp3"></audio>
-<audio id="surprised" src="surprise.mp3"></audio>
-<audio id="angry" src="anger.mp3"></audio>
-<audio id="scared" src="fear.mp3"></audio>
 
 </body>
 <script type="text/javascript" src="webcam.min.js"></script>
