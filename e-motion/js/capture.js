@@ -100,14 +100,36 @@
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
-
-      var data = canvas.toDataURL('image/png');
-      photo.setAttribute('src', data);
-    } else {
+      console.log(context);
+      var dataURL = canvas.toDataURL("image/jpg").substring(23).replace('','+');
+      console.log(dataURL);
+      // var file = document.getElementById("canvas").src.substring(23).replace('','+');
+      var img = Base64Binary.decodeArrayBuffer(dataURL);
+      console.log(img);
+      var ajax = new XMLHttpRequest();
+      ajax.addEventListener("load", function(event) { uploadcomplete(event); }, false);
+      ajax.open("POST", "https://api.projectoxford.ai/emotion/v1.0/recognize","image/jpg");
+      ajax.setRequestHeader("Content-Type","application/octet-stream");
+      //ajax.setRequestHeader("Accept-Encoding","gzip, deflate");
+      ajax.setRequestHeader("Accept","text/html,application/xhtml+xml,application/xml");
+      ajax.setRequestHeader("Ocp-Apim-Subscription-Key","5a8753340fbc495b8d59347c13910f9d");
+      ajax.send(img);
+        } else {
       clearphoto();
     }
   }
 
+  function uploadcomplete(event){
+    console.log("????");
+        console.log(event);
+
+    var xmlDoc = event.target.responseXML;
+    console.log(xmlDoc);
+    var list = xmlDoc.getElementsByTagName("scores");
+    console.log(list);
+}
+
+  
   // Set up our event listener to run the startup process
   // once loading is complete.
   window.addEventListener('load', startup, false);
