@@ -7,7 +7,8 @@
 <script language="JavaScript">
 function take_snapshot() {
     Webcam.snap(function(data_uri) {
-		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/><button onclick="SaveSnap();">Analyze</button>';
+		document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
+		SaveSnap();
 	});
 }
 
@@ -44,53 +45,53 @@ function uploadcomplete(event){
  	var neutral = Number(document.getElementById("neutral").innerHTML = list[0].childNodes[5].textContent);
 	var sadness = Number(document.getElementById("sadness").innerHTML = list[0].childNodes[6].textContent);
 	var surprise = Number(document.getElementById("surprise").innerHTML = list[0].childNodes[7].textContent);
-	var maxValue = list[0].childNodes[5].textContent;
-	if (maxValue < list[0].childNodes[7].textContent) {
-		maxValue = list[0].childNodes[7].textContent;
+	var maxValue = Number(list[0].childNodes[5].textContent);
+	if (Number(list[0].childNodes[7].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[7].textContent);
 		audio = document.getElementById("surprised");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[0].textContent) {
-		maxValue = list[0].childNodes[0].textContent;
+	if (Number(list[0].childNodes[0].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[0].textContent);
 		audio = document.getElementById("angry");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[1].textContent) {
-		maxValue = list[0].childNodes[1].textContent;
+	if (Number(list[0].childNodes[1].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[1].textContent);
 		audio = document.getElementById("contempted");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[2].textContent) {
-		maxValue = list[0].childNodes[2].textContent;
+	if (Number(list[0].childNodes[2].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[2].textContent);
 		audio = document.getElementById("disgusted");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[3].textContent) {
-		maxValue = list[0].childNodes[3].textContent;
+	if (Number(list[0].childNodes[3].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[3].textContent);
 		audio = document.getElementById("scared");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[4].textContent) {
-		maxValue = list[0].childNodes[4].textContent;
+	if (Number(list[0].childNodes[4].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[4].textContent);
 		audio = document.getElementById("happy");
 		//audio.play();
 	}
-	if (maxValue < list[0].childNodes[6].textContent) {
-		maxValue = list[0].childNodes[6].textContent;
+	if (Number(list[0].childNodes[6].textContent) > maxValue) {
+		maxValue = Number(list[0].childNodes[6].textContent);
 		audio = document.getElementById("sad");
 		//audio.play();
 	}
 	
 	for (var i = 0; i < 8; i++) {
-		if (list[0].childNodes[i].textContent == maxValue) {
+		if (Number(list[0].childNodes[i].textContent) == maxValue) {
 			maxEmotion = list[0].childNodes[i].tagName; 
 		}
 	}
 	
-	if (maxValue == list[0].childNodes[5].textContent && list[0].childNodes[0].textContent > 0.01 && list[0].childNodes[1].textContent > 0.01) {
+	if (maxValue == Number(list[0].childNodes[5].textContent) && Number(list[0].childNodes[0].textContent) > 0.01 && Number(list[0].childNodes[1].textContent) > 0.01) {
 		audio = document.getElementById("confused");
 		audio.play();
-		maxEmotion = Confused;
+		maxEmotion = Confused.textContent;
 	}
 
 	document.getElementById("maxEmotion").innerHTML = maxEmotion;
