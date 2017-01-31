@@ -3,7 +3,6 @@ body {
 }
 
 video {
-  margin-left:100px;
   max-width: 100%;
   width: 320px;
 }
@@ -14,15 +13,6 @@ margin-top: 2vh;
 display:inline;
 margin-left: 8vw;
 margin-bottom: 12vh;
-}
-
-#my_camera {
-  max-width: 75%;
-  max-height: 100%;
-  display: inline;
-  position:absolute;
-  margin-left: 40%;
-  margin-top: 15vh;
 }
 
 #results{
