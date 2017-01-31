@@ -3,6 +3,7 @@ body {
 }
 
 video {
+  margin-left:100px;
   max-width: 100%;
   width: 320px;
 }

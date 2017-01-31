@@ -2,24 +2,7 @@
   "name": "webrtc-codelab",
   "version": "0.0.1",
   "description": "WebRTC codelab",
-  "scripts": {
-    "start": "live-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thebeebs/emotion.git"
-  },
-  "bugs": {
-    "url": "https://github.com/thebeebs/emotion/issues"
-  },
-  "dependencies": {
-    "live-server": "^1.2.0"
-  },
   "dependencies": {
     "node-static": "0.7.7",
-    "socket.io": "1.4.5"
-  },
-	"engines": {
-    "npm": ">=3.10.0",
-    "node": ">=6.0.0"
+    "socket.io": "1.2.0"
   }}
